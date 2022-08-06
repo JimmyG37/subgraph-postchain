@@ -1,0 +1,20 @@
+type Post @entity {
+  id: ID!
+  creator: Bytes!
+  postId: BigInt!
+  likeDeadline: BigInt!
+}
+
+type Comment @entity {
+  id: ID!
+  commenter: Bytes!
+  postId: BigInt!
+  commentId: BigInt!
+}
+
+type Like @entity {
+  id: ID!
+  user: Bytes!
+  postId: BigInt!
+  commentId: BigInt!
+}

@@ -1,0 +1,30 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: PostChain
+    network: rinkeby
+    source:
+      address: "0xA0B30A7C9e8bedfeE1343473D5e617998fF38042"
+      abi: PostChain
+      startBlock: 11157004
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - CommentLiked
+        - PostCreated
+        - RepliedToPost
+      abis:
+        - name: PostChain
+          file: ./abis/PostChain.json
+      eventHandlers:
+        - event: CommentLiked(indexed address,indexed uint256,indexed uint256)
+          handler: handleCommentLiked
+        - event: PostCreated(indexed address,indexed uint256,indexed uint256)
+          handler: handlePostCreated
+        - event: RepliedToPost(indexed address,indexed uint256,indexed uint256)
+          handler: handleRepliedToPost
+      file: ./src/post-chain.ts
